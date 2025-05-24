@@ -1,0 +1,222 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables CSS personnalisées */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #4f46e5;
+    --accent-color: #f43f5e;
+    --background-light: #f8fafc;
+    --text-dark: #1e293b;
+}
+
+@layer components {
+    /* Styles de base */
+    body {
+        @apply bg-gray-50 text-gray-900 min-h-screen;
+    }
+
+    /* Conteneur principal */
+    .main-container {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8;
+    }
+
+    /* Styles des cartes */
+    .room-card {
+        @apply bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl;
+    }
+
+    .room-card-image {
+        @apply w-full h-64 object-cover object-center;
+        aspect-ratio: 16/9;
+    }
+
+    .room-card-content {
+        @apply p-6;
+    }
+
+    /* Boutons stylisés */
+    .btn {
+        @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-300 transform;
+    }
+
+    .btn-primary {
+        @apply bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-md hover:shadow-lg;
+    }
+
+    .btn-secondary {
+        @apply bg-white text-gray-700 border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50;
+    }
+
+    /* Formulaires élégants */
+    .form-group {
+        @apply space-y-2 mb-6;
+    }
+
+    .form-label {
+        @apply block text-sm font-medium text-gray-700;
+    }
+
+    .form-input {
+        @apply w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200;
+    }
+
+    /* Galerie d'images */
+    .image-gallery {
+        @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
+    }
+
+    .gallery-item {
+        @apply relative overflow-hidden rounded-xl shadow-md;
+    }
+
+    .gallery-image {
+        @apply w-full h-full object-cover transition-transform duration-500 hover:scale-110;
+        aspect-ratio: 4/3;
+    }
+
+    /* Badges et statuts */
+    .status-badge {
+        @apply inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold;
+    }
+
+    .status-available {
+        @apply bg-green-100 text-green-800;
+    }
+
+    .status-booked {
+        @apply bg-red-100 text-red-800;
+    }
+
+    .status-pending {
+        @apply bg-yellow-100 text-yellow-800;
+    }
+
+    /* Navigation */
+    .nav-menu {
+        @apply flex items-center space-x-4;
+    }
+
+    .nav-link {
+        @apply px-4 py-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition duration-200;
+    }
+
+    .nav-link-active {
+        @apply bg-blue-50 text-blue-700;
+    }
+
+    /* Animations */
+    .fade-in {
+        animation: fadeIn 0.6s ease-in;
+    }
+
+    .slide-up {
+        animation: slideUp 0.5s ease-out;
+    }
+
+    /* Loading spinner */
+    .spinner {
+        @apply w-8 h-8 border-4 border-blue-200 rounded-full animate-spin;
+        border-top-color: var(--primary-color);
+    }
+
+    /* Image placeholder et fallback */
+    .image-placeholder {
+        @apply bg-gray-200 animate-pulse rounded-lg;
+    }
+
+    .image-error {
+        @apply flex items-center justify-center bg-gray-100 rounded-lg text-gray-400;
+        min-height: 200px;
+    }
+}
+
+/* Animations personnalisées */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Gestion des images responsive */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Fallback pour les images non chargées */
+img:not([src]),
+img[src=""],
+img[src="#"] {
+    position: relative;
+    min-height: 200px;
+    background-color: #f3f4f6;
+}
+
+img:not([src])::after,
+img[src=""]::after,
+img[src="#"]::after {
+    content: '📷';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+}
+
+/* Media Queries pour le responsive */
+@screen sm {
+    .room-card-image {
+        height: 300px;
+    }
+}
+
+@screen lg {
+    .room-card-image {
+        height: 400px;
+    }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-light: #1a1a1a;
+        --text-dark: #ffffff;
+    }
+
+    body {
+        @apply bg-gray-900 text-gray-100;
+    }
+
+    .room-card {
+        @apply bg-gray-800 border-gray-700;
+    }
+
+    .btn-secondary {
+        @apply bg-gray-700 text-gray-200 border-gray-600 hover:bg-gray-600;
+    }
+
+    .form-input {
+        @apply bg-gray-700 border-gray-600 text-white;
+    }
+
+    .image-placeholder {
+        @apply bg-gray-700;
+    }
+
+    .nav-link {
+        @apply text-gray-300 hover:text-white hover:bg-gray-700;
+    }
+}
